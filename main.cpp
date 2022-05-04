@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <iomanip>
 
 #define N 8
 
@@ -36,11 +37,13 @@ int main() {
 
 
 void printTable(std::vector<std::vector<int>> &table) {
+    std::cout << "-------------------------------------------------\n";
     for (int i = 0; i < N; ++i) {
+        std::cout << "|";
         for (int j = 0; j < N; ++j) {
-            std::cout << table[i][j] << "\t";
+            std::cout << "  " << std::setw(3) << std::left << table[i][j] << "|" ;
         }
-        std::cout << "\n";
+        std::cout << "\n-------------------------------------------------\n";
     }
     std::cout << std::endl;
 }
