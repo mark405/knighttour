@@ -3,6 +3,7 @@
 #include <iomanip>
 
 #define N 8
+#define ForPosition 1
 
 const std::vector<std::vector<int>> possibleOptions{
         {1, 1,  2, 2,  -1, -1, -2, -2},
@@ -15,9 +16,10 @@ void printTable(std::vector<std::vector<int>> &table); //printing matrix
 bool neighbour(int rowStart, int colStart, int rowEnd, int colEnd); //checking if first move is close to last one
 bool isValid(std::vector<std::vector<int>> &table, int row, int col); //checking if moving knight is possible on position row, col
 bool nextMove(std::vector<std::vector<int>> &table, int &row, int &col); // moving knight
-bool findClosedTour(); //checking if the algorithm found closed tour
+bool findClosedTour(int rowStart,int colStart,int minus); //checking if the algorithm found closed tour
+bool findClosedTour(int &rowStart,int &colStart); //checking if the algorithm found closed tour
 void optimizeByWarnsdoffAlgorithm(std::vector<std::vector<int>> &table, int &index, int &minCount, int rowStart, int colStart); //finding move that has minimum next moves
-
+void menu();
 
 int main() {
     srand(time(NULL));
@@ -25,16 +27,51 @@ int main() {
     std::vector<std::vector<int>> table(N, std::vector<int> (N, 0));
 
 
-    for(;;) {
-        if(findClosedTour()) {
-            break;
-        }
-        count = 0;
-    }
+    menu();
 
     return 0;
 }
 
+
+void menu(){
+    int choice,row,col;
+    while(1){
+        count=0;
+        std::cout << "\n1.Enter positions\n";
+        std::cout << "2.Random positions\n";
+        std::cout << "3.Exit\n";
+        std::cout << "\nChoose your destiny:\n";
+        std::cin >> choice;
+        switch(choice){
+            case 1:
+                row=-1;
+                col=-1;
+                std::cout << "\nEnter positions:";
+                do{
+                    std::cout << "\nRow:";
+                    std::cin >> row;
+                    std::cout << "Col: ";
+                    std::cin >> col;
+                }while(row<=0||col<=0||row>N||col>N);
+                if(!findClosedTour(row,col,ForPosition)){
+                    std::cout << "\nCan't return to starting position from ("<< row<<";"<< col<<")\n";
+                }
+            break;
+            
+            case 2:
+                if(!findClosedTour(row,col)){
+                        std::cout << "\nCan't return to starting position from ("<< row+ForPosition<<";"<< col+ForPosition<<")\n";
+                    }
+            break;
+            
+            case 3:
+                return;
+            break;
+        }         
+    }
+
+
+}
 
 void printTable(std::vector<std::vector<int>> &table) {
     std::cout << "-------------------------------------------------\n";
@@ -84,12 +121,33 @@ bool nextMove(std::vector<std::vector<int>> &table, int &row, int &col) {
 }
 
 
-bool findClosedTour() {
+bool findClosedTour(int rowStart,int colStart, int minus) {
+
+    std::vector<std::vector<int>> table(N, std::vector<int> (N, 0)); //matrix with zero values
+    rowStart-=minus;
+    colStart-=minus;
+    int row = rowStart, col = colStart;
+
+    table[rowStart][colStart] = ++count; //put value of 1 to start position
+
+
+    while(count != 64) {
+        if(!nextMove(table, row, col)) { //if got lost or didnt find
+            return false;
+        }
+    }
+
+    printTable(table);
+
+    return neighbour(rowStart, colStart, row, col); //if neighbour
+}
+
+bool findClosedTour(int &rowStart,int &colStart) {
 
     std::vector<std::vector<int>> table(N, std::vector<int> (N, 0)); //matrix with zero values
 
-    int rowStart = rand() % N; //random start position
-    int colStart = rand() % N;
+     rowStart = rand() % N; //random start position
+     colStart = rand() % N;
 
     int row = rowStart, col = colStart;
 
@@ -106,6 +164,7 @@ bool findClosedTour() {
 
     return neighbour(rowStart, colStart, row, col); //if neighbour
 }
+
 
 
 void optimizeByWarnsdoffAlgorithm(std::vector<std::vector<int>> &table, int &index, int &minCount, const int rowStart, const int colStart) {
@@ -128,4 +187,3 @@ void optimizeByWarnsdoffAlgorithm(std::vector<std::vector<int>> &table, int &ind
         }
     }
 }
-
