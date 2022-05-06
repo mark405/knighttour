@@ -3,7 +3,6 @@
 #include <iomanip>
 
 #define N 8
-#define ForPosition 1
 
 const std::vector<std::vector<int>> possibleOptions{
         {1, 1,  2, 2,  -1, -1, -2, -2},
@@ -16,7 +15,6 @@ void printTable(std::vector<std::vector<int>> &table); //printing matrix
 bool neighbour(int rowStart, int colStart, int rowEnd, int colEnd); //checking if first move is close to last one
 bool isValid(std::vector<std::vector<int>> &table, int row, int col); //checking if moving knight is possible on position row, col
 bool nextMove(std::vector<std::vector<int>> &table, int &row, int &col); // moving knight
-bool findClosedTour(int rowStart,int colStart,int minus); //checking if the algorithm found closed tour
 bool findClosedTour(int &rowStart,int &colStart); //checking if the algorithm found closed tour
 void optimizeByWarnsdoffAlgorithm(std::vector<std::vector<int>> &table, int &index, int &minCount, int rowStart, int colStart); //finding move that has minimum next moves
 void menu();
@@ -34,9 +32,9 @@ int main() {
 
 
 void menu(){
-    int choice,row,col;
-    while(1){
-        count=0;
+    int choice, row, col;
+    while(true){
+        count = 0;
         std::cout << "\n1.Enter positions\n";
         std::cout << "2.Random positions\n";
         std::cout << "3.Exit\n";
@@ -44,29 +42,39 @@ void menu(){
         std::cin >> choice;
         switch(choice){
             case 1:
-                row=-1;
-                col=-1;
+                row = -1;
+                col = -1;
                 std::cout << "\nEnter positions:";
-                do{
+                do {
                     std::cout << "\nRow:";
                     std::cin >> row;
                     std::cout << "Col: ";
                     std::cin >> col;
-                }while(row<=0||col<=0||row>N||col>N);
-                if(!findClosedTour(row,col,ForPosition)){
-                    std::cout << "\nCan't return to starting position from ("<< row<<";"<< col<<")\n";
+                } while(row <= 0|| col <= 0|| row > N|| col > N);
+                if(!findClosedTour(--row, --col)){
+                    std::cout << "\nCan't return to starting position from ("<< row + 1 << ";" << col + 1 <<")\n";
+                } else {
+                    std::cout << "\nSucces!Your starting position is (" << row + 1 << ";" << col + 1 << ")\n";
                 }
-            break;
+                break;
             
             case 2:
-                if(!findClosedTour(row,col)){
-                        std::cout << "\nCan't return to starting position from ("<< row+ForPosition<<";"<< col+ForPosition<<")\n";
-                    }
-            break;
+                row = rand() % N;
+                col = rand() % N;
+                if(!findClosedTour(row, col)){
+                        std::cout << "\nCan't return to starting position from ("<< row + 1 <<";"<< col + 1 <<")\n";
+                        row = rand() % N;
+                        col = rand() % N;
+                } else {
+                    std::cout << "\nSucces!Your starting position is (" << row + 1 << ";" << col + 1 << ")\n";
+                }
+                break;
             
             case 3:
                 return;
-            break;
+
+            default:
+                std::cout << "\nIncorrect input.\n";
         }         
     }
 
@@ -124,8 +132,8 @@ bool nextMove(std::vector<std::vector<int>> &table, int &row, int &col) {
 bool findClosedTour(int rowStart,int colStart, int minus) {
 
     std::vector<std::vector<int>> table(N, std::vector<int> (N, 0)); //matrix with zero values
-    rowStart-=minus;
-    colStart-=minus;
+    rowStart -= minus;
+    colStart -= minus;
     int row = rowStart, col = colStart;
 
     table[rowStart][colStart] = ++count; //put value of 1 to start position
@@ -145,9 +153,6 @@ bool findClosedTour(int rowStart,int colStart, int minus) {
 bool findClosedTour(int &rowStart,int &colStart) {
 
     std::vector<std::vector<int>> table(N, std::vector<int> (N, 0)); //matrix with zero values
-
-     rowStart = rand() % N; //random start position
-     colStart = rand() % N;
 
     int row = rowStart, col = colStart;
 
