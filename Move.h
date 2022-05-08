@@ -7,15 +7,10 @@
 
 class Move
 {
-private: 
-	const std::vector<std::vector<int>> possibleOptions
-	{
-			{1, 1,  2, 2,  -1, -1, -2, -2},
-			{2, -2, 1, -1, 2,  -2, 1,  -1}
-	};
 public:
-	bool neighbour(int rowStart, int colStart, int rowEnd, int colEnd); //checking if first move is close to last one
+	bool neighbour(int rowStart, int colStart, int rowEnd, int colEnd, std::vector<std::vector<int>> possibleOptions); //checking if first move is close to last one
 	bool isValid(std::vector<std::vector<int>>& table, int row, int col); //checking if moving knight is possible on position row, col
-	bool nextMove(std::vector<std::vector<int>>& table, int& row, int& col); // moving knight
+	bool nextMove(std::vector<std::vector<int>>& table, int& row, int& col, std::vector<std::vector<int>> possibleOptions); // moving knight
 };
+
 
