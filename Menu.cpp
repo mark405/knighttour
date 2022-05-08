@@ -18,15 +18,16 @@ int Menu::ChooseDestiny()
     return choice;
 }
 
-void Menu::EnterPositions(int* row, int* col)
-{
+void Menu::EnterPositions(int& row, int& col)
+{ 
     std::cout << "\nEnter positions:";
     do
     {
         std::cout << "\nRow: ";
-        std::cin >> *row;     
+        std::cin >> row;     
         std::cout << "Col: ";
-        std::cin >> *col;
-    } while (*row <= 0 || *col <= 0 || *row > N || *col > N);
+        std::cin >> col;
+    } while (row <= 0 || col <= 0 || row > N || col > N);
 }
+
 
