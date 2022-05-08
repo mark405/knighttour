@@ -22,7 +22,7 @@ bool Move::nextMove(std::vector<std::vector<int>>& table, int& row, int& col)
     int minCount = 8;
     int index = 0;
 
-    algorithm.optimizeByWarnsdoffAlgorithm(table, index, minCount, row, col); //find the best move
+    algorithm.optimizeByWarnsdoffAlgorithm(table, index, minCount, row, col, possibleOptions); //find the best move
 
     if (minCount == 8) //if no ways to move knight
     { 
