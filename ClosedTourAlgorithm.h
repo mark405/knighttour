@@ -2,13 +2,19 @@
 #include "Printer.h"
 #include "Move.h"
 
+enum STATUS
+{
+	SUCCESS,
+	TRAP,
+	FAILURE
+};
+
 class ClosedTourAlgorithm
 {
 private:
-	Printer *_printer;
-	Move *_move;
+	Printer _printer;
+	Move _move;
 public:
-	bool findClosedTour(int& rowStart, int& colStart); //checking if the algorithm found closed tour
-	ClosedTourAlgorithm(Printer *printer, Move *move);
+	STATUS findClosedTour(int& rowStart, int& colStart); //checking if the algorithm found closed tour
+	ClosedTourAlgorithm(Printer& printer, Move& move);
 };
-
