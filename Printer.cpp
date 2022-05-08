@@ -41,7 +41,14 @@ void Printer::printResultSuccessMessage(int row, int col)
     std::cout << message << std::endl;
 }
 
+void Printer::printDeadEndMessage(int row, int col)
+{
+    std::string message = "\nGot in a trap! from(" + std::to_string(row + 1) + ';' + std::to_string(col + 1) + ')';
+    std::cout << message << std::endl;
+}
+
 void Printer::printIncorrectInputMessage()
 {
     std::cout << "\nIncorrect input." << std::endl;
 }
+
