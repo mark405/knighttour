@@ -1,194 +1,79 @@
 #include <iostream>
-#include <vector>
-#include <iomanip>
+#include <vector> 
+#include <iomanip> 
+#include "Printer.h"
+#include "Move.h"
+#include "WarnsdoffAlgorithm.h"
+#include "ClosedTourAlgorithm.h"
+#include "MovesCounter.h"
+#include "Menu.h"
 
-#define N 8
-
-const std::vector<std::vector<int>> possibleOptions{
-        {1, 1,  2, 2,  -1, -1, -2, -2},
-        {2, -2, 1, -1, 2,  -2, 1,  -1}
-};
-
-int count = 0;
-
-void printTable(std::vector<std::vector<int>> &table); //printing matrix
-bool neighbour(int rowStart, int colStart, int rowEnd, int colEnd); //checking if first move is close to last one
-bool isValid(std::vector<std::vector<int>> &table, int row, int col); //checking if moving knight is possible on position row, col
-bool nextMove(std::vector<std::vector<int>> &table, int &row, int &col); // moving knight
-bool findClosedTour(int &rowStart,int &colStart); //checking if the algorithm found closed tour
-void optimizeByWarnsdoffAlgorithm(std::vector<std::vector<int>> &table, int &index, int &minCount, int rowStart, int colStart); //finding move that has minimum next moves
 void menu();
 
-int main() {
+int main()
+{
     srand(time(NULL));
 
-    std::vector<std::vector<int>> table(N, std::vector<int> (N, 0));
-
+    std::vector<std::vector<int>> table(N, std::vector<int>(N, 0));
 
     menu();
 
     return 0;
 }
 
-
-void menu(){
+void menu()
+{
+    Menu menu;
+    Printer printer;
+    Move move;
+    ClosedTourAlgorithm closedTourAlgorithm(&printer, &move);
     int choice, row, col;
-    while(true){
-        count = 0;
-        std::cout << "\n1.Enter positions\n";
-        std::cout << "2.Random positions\n";
-        std::cout << "3.Exit\n";
-        std::cout << "\nChoose your destiny:\n";
-        std::cin >> choice;
-        switch(choice){
-            case 1:
-                row = -1;
-                col = -1;
-                std::cout << "\nEnter positions:";
-                do {
-                    std::cout << "\nRow:";
-                    std::cin >> row;
-                    std::cout << "Col: ";
-                    std::cin >> col;
-                } while(row <= 0|| col <= 0|| row > N|| col > N);
-                if(!findClosedTour(--row, --col)){
-                    std::cout << "\nCan't return to starting position from ("<< row + 1 << ";" << col + 1 <<")\n";
-                } else {
-                    std::cout << "\nSucces!Your starting position is (" << row + 1 << ";" << col + 1 << ")\n";
-                }
-                break;
-            
-            case 2:
-                row = rand() % N;
-                col = rand() % N;
-                if(!findClosedTour(row, col)){
-                        std::cout << "\nCan't return to starting position from ("<< row + 1 <<";"<< col + 1 <<")\n";
-                        row = rand() % N;
-                        col = rand() % N;
-                } else {
-                    std::cout << "\nSucces!Your starting position is (" << row + 1 << ";" << col + 1 << ")\n";
-                }
-                break;
-            
-            case 3:
-                return;
 
-            default:
-                std::cout << "\nIncorrect input.\n";
-        }         
-    }
+    while (true)
+    {
+        MovesCounter::ResetCount();
 
+        menu.PrintOptions();
 
-}
+        choice = menu.ChooseDestiny();
 
-void printTable(std::vector<std::vector<int>> &table) {
-    std::cout << "-------------------------------------------------\n";
-    for (int i = 0; i < N; ++i) {
-        std::cout << "|";
-        for (int j = 0; j < N; ++j) {
-            std::cout << "  " << std::setw(3) << std::left << table[i][j] << "|" ;
-        }
-        std::cout << "\n-------------------------------------------------\n";
-    }
-    std::cout << std::endl;
-}
+        switch (choice)
+        {
+        case 1:
+            row = -1;
+            col = -1;
 
+            menu.EnterPositions(&row, &col);
 
-bool neighbour(const int rowStart, const int colStart, const int rowEnd, const int colEnd) {
-    for (int i = 0; i < N; ++i)
-        if ((rowStart + possibleOptions[0][i] == rowEnd) && (colStart + possibleOptions[1][i] == colEnd))
-            return true;
-
-    return false;
-}
-
-
-bool isValid(std::vector<std::vector<int>> &table, const int row, const int col) {
-    return row >= 0 && row < N && col >= 0 && col < N && !table[row][col];
-}
-
-
-bool nextMove(std::vector<std::vector<int>> &table, int &row, int &col) {
-
-
-    int minCount = 8;
-    int index = 0;
-
-    optimizeByWarnsdoffAlgorithm(table, index, minCount, row, col); //find the best move
-
-    if(minCount == 8) { //if no ways to move knight
-        return false;
-    }
-
-    row += possibleOptions[0][index]; //move knight by row
-    col += possibleOptions[1][index]; //move knight by col
-
-    table[row][col] = ++count; //put number of move to pos
-
-    return true;
-}
-
-
-bool findClosedTour(int rowStart,int colStart, int minus) {
-
-    std::vector<std::vector<int>> table(N, std::vector<int> (N, 0)); //matrix with zero values
-    rowStart -= minus;
-    colStart -= minus;
-    int row = rowStart, col = colStart;
-
-    table[rowStart][colStart] = ++count; //put value of 1 to start position
-
-
-    while(count != 64) {
-        if(!nextMove(table, row, col)) { //if got lost or didnt find
-            return false;
-        }
-    }
-
-    printTable(table);
-
-    return neighbour(rowStart, colStart, row, col); //if neighbour
-}
-
-bool findClosedTour(int &rowStart,int &colStart) {
-
-    std::vector<std::vector<int>> table(N, std::vector<int> (N, 0)); //matrix with zero values
-
-    int row = rowStart, col = colStart;
-
-    table[rowStart][colStart] = ++count; //put value of 1 to start position
-
-
-    while(count != 64) {
-        if(!nextMove(table, row, col)) { //if got lost or didnt find
-            return false;
-        }
-    }
-
-    printTable(table);
-
-    return neighbour(rowStart, colStart, row, col); //if neighbour
-}
-
-
-
-void optimizeByWarnsdoffAlgorithm(std::vector<std::vector<int>> &table, int &index, int &minCount, const int rowStart, const int colStart) {
-    for (int i = 0; i < N; ++i) {
-        int rowNext = rowStart + possibleOptions[0][i];
-        int colNext = colStart + possibleOptions[1][i];
-        int c = 0;//count of possible moves of each j iteration
-        if(isValid(table, rowNext, colNext)) {
-            for (int j = 0; j < N; ++j) {
-                int rowNextNext = rowNext + possibleOptions[0][j];
-                int colNextNext = colNext + possibleOptions[1][j];
-                if (isValid(table, rowNextNext, colNextNext)) {
-                    ++c;
-                }
+            if (!closedTourAlgorithm.findClosedTour(--row, --col))
+            {
+                printer.printResultErrorMessage(row, col);
             }
-            if(c < minCount) { //checking if current miCount value less than previous
-                minCount = c;
-                index = i;
+            else
+            {
+                printer.printResultSuccessMessage(row, col);
             }
+            break;
+
+        case 2:
+            row = rand() % N;
+            col = rand() % N;
+
+            if (!closedTourAlgorithm.findClosedTour(row, col))
+            {
+                printer.printResultErrorMessage(row, col);
+            }
+            else
+            {
+                printer.printResultSuccessMessage(row, col);
+            }
+            break;
+
+        case 3:
+            return;
+
+        default:
+            printer.printIncorrectInputMessage();
         }
     }
 }

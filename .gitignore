@@ -2,3 +2,5 @@ a.out
 CMakeLists.txt
 cmake-build-debug
 .idea
+/.vs
+/x64/Debug
