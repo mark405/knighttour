@@ -92,6 +92,8 @@ void menu()
         default:
             printer.printIncorrectInputMessage();
         }
+        
+        std::cout << "Number of moves: " << MovesCounter::Getcount() << std::endl;
     }
 }
 
