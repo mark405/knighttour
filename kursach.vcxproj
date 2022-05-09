@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MovesCounter.cpp" />
-    <ClCompile Include="WarnsdoffAlgorithm.cpp" />
     <ClCompile Include="ClosedTourAlgorithm.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Move.cpp" />
@@ -150,7 +149,6 @@
   <ItemGroup>
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MovesCounter.h" />
-    <ClInclude Include="WarnsdoffAlgorithm.h" />
     <ClInclude Include="ClosedTourAlgorithm.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="Printer.h" />
