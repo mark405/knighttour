@@ -7,6 +7,7 @@
 #include "ClosedTourAlgorithm.h"
 #include "MovesCounter.h"
 #include "Menu.h"
+#include "TimerChecker.h"
 
 void menu();
 
