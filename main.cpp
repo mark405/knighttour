@@ -3,7 +3,6 @@
 #include <iomanip> 
 #include "Printer.h"
 #include "Move.h"
-#include "WarnsdoffAlgorithm.h"
 #include "ClosedTourAlgorithm.h"
 #include "MovesCounter.h"
 #include "Menu.h"
