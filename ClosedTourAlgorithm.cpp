@@ -9,6 +9,8 @@ ClosedTourAlgorithm::ClosedTourAlgorithm(Printer& printer, Move& move)
 
 STATUS ClosedTourAlgorithm::findClosedTour(int& rowStart, int& colStart)
 {
+    TimerChecker timer;
+    
     std::vector<std::vector<int>> table(N, std::vector<int>(N, 0)); //matrix with zero values
     std::vector<std::vector<int>> possibleOptions
     {
