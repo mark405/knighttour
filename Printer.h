@@ -11,5 +11,6 @@ public:
 	void printResultSuccessMessage(int row, int col);
 	void printDeadEndMessage(int row, int col);
 	void printIncorrectInputMessage();   
+	void printDeadEndMessage(int row, int col);
 };
 
