@@ -1,6 +1,7 @@
 #pragma once
 #include "Printer.h"
 #include "Move.h"
+#include "TimerChecker.h"
 
 enum STATUS
 {
