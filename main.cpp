@@ -10,7 +10,7 @@
 
 void menu();
 
-int main()
+int main() 
 {
     srand(time(NULL));
 
@@ -19,17 +19,19 @@ int main()
     menu();
 
     return 0;
-}
+} 
 
-void menu()
+void menu() 
 {
     Menu menu;
     Printer printer;
     Move move;
-    ClosedTourAlgorithm closedTourAlgorithm(&printer, &move);
-    int choice, row, col;
+    ClosedTourAlgorithm closedTourAlgorithm(printer, move);
 
-    while (true)
+    int choice, row, col;
+    bool status = true;
+
+    while (status)
     {
         MovesCounter::ResetCount();
 
@@ -37,19 +39,27 @@ void menu()
 
         choice = menu.ChooseDestiny();
 
+        STATUS RESULT;
+
         switch (choice)
         {
         case 1:
-            row = -1;
-            col = -1;
+            row = 0;
+            col = 0;
 
-            menu.EnterPositions(&row, &col);
+            menu.EnterPositions(row, col);
 
-            if (!closedTourAlgorithm.findClosedTour(--row, --col))
+            RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
+
+            if (RESULT == FAILURE)
             {
                 printer.printResultErrorMessage(row, col);
             }
-            else
+            else if (RESULT == TRAP)
+            {
+                printer.printDeadEndMessage(row, col);
+            }
+            else if (RESULT == SUCCESS)
             {
                 printer.printResultSuccessMessage(row, col);
             }
@@ -59,21 +69,29 @@ void menu()
             row = rand() % N;
             col = rand() % N;
 
-            if (!closedTourAlgorithm.findClosedTour(row, col))
+            RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
+
+            if (RESULT == FAILURE)
             {
                 printer.printResultErrorMessage(row, col);
             }
-            else
+            else if (RESULT == TRAP)
+            {
+                printer.printDeadEndMessage(row, col);
+            }
+            else if (RESULT == SUCCESS)
             {
                 printer.printResultSuccessMessage(row, col);
             }
             break;
 
         case 3:
-            return;
+            status = false;
+            break;
 
         default:
             printer.printIncorrectInputMessage();
         }
     }
 }
+
