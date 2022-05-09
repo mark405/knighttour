@@ -67,8 +67,8 @@ void menu()
             break;
 
         case 2:
-            row = rand() % N;
-            col = rand() % N;
+            row = rand() % N + 1;
+            col = rand() % N + 1;
 
             RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
 
