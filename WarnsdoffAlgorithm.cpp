@@ -1,6 +1,7 @@
 #include "WarnsdoffAlgorithm.h"
 
-void WarnsdoffAlgorithm::optimizeByWarnsdoffAlgorithm(std::vector<std::vector<int>>& table, int& index, int& minCount, int rowStart, int colStart)
+void WarnsdoffAlgorithm::optimizeByWarnsdoffAlgorithm(std::vector<std::vector<int>>& table, int& index,
+    int& minCount, int rowStart, int colStart, std::vector<std::vector<int>> possibleOptions)
 {
     Move move;
 
@@ -31,3 +32,4 @@ void WarnsdoffAlgorithm::optimizeByWarnsdoffAlgorithm(std::vector<std::vector<in
         }
     }
 }
+
