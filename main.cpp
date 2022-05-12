@@ -14,8 +14,6 @@ int main()
 {
     srand(time(NULL));
 
-    std::vector<std::vector<int>> table(N, std::vector<int>(N, 0));
-
     menu();
 
     return 0;
