@@ -7,9 +7,9 @@ class Printer
 {
 public:
 	void printTable(std::vector<std::vector<int>>& table); //printing matrix
-	void printResultErrorMessage(int row, int col); 
-	void printResultSuccessMessage(int row, int col);
-	void printDeadEndMessage(int row, int col);
+	void printResultErrorMessage(char col, int row);
+	void printResultSuccessMessage(char col, int row);
+    void printDeadEndMessage(char col, int row);
 	void printIncorrectInputMessage();
 };
 
