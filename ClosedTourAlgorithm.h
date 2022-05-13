@@ -3,7 +3,7 @@
 #include "Move.h"
 #include "TimerChecker.h"
 
-enum STATUS
+enum class STATUS
 {
 	SUCCESS,
 	TRAP,
@@ -17,5 +17,6 @@ private:
 	Move _move;
 public:
 	STATUS findClosedTour(int& rowStart, int& colStart); //checking if the algorithm found closed tour
-	ClosedTourAlgorithm(Printer& printer, Move& move);
+	ClosedTourAlgorithm(const Printer& printer, const Move& move):
+	_printer(printer), _move(move) {}
 };
