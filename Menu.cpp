@@ -25,7 +25,7 @@ void Menu::EnterPositions(int& row, int& col)
     {
         std::cout << "\nRow: ";
         std::cin >> row;     
-        std::cout << "Col: ";
+        std::cout << "Col: ";  //comment
         std::cin >> col;
     } while (row <= 0 || col <= 0 || row > N || col > N);
 }
