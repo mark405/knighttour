@@ -36,16 +36,14 @@ void Printer::printTable(std::vector<std::vector<int>>& table)
     std::cout << std::endl;
 }
 
-void Printer::printResultErrorMessage(int row, int col)
+void Printer::printResultErrorMessage(char col, int row)
 {
-    std::string message = "\nCan't return to starting position from (" + std::to_string(row + 1) + ';' + std::to_string(col + 1) + ')';
-    std::cout << message << std::endl;
+    std::cout << "\nCan't return to starting position from " << col << row + 1 << std::endl;
 }
 
-void Printer::printResultSuccessMessage(int row, int col)
+void Printer::printResultSuccessMessage(char col, int row)
 {
-    std::string message = "\nSuccess!Your starting position is (" + std::to_string(row + 1) + ';' + std::to_string(col + 1) + ')';
-    std::cout << message << std::endl;
+    std::cout << "\nSucces!Your starting position is " << col << row + 1 << std::endl;
 }
 
 void Printer::printIncorrectInputMessage()
@@ -53,9 +51,7 @@ void Printer::printIncorrectInputMessage()
     std::cout << "\nIncorrect input." << std::endl;
 }
 
-void Printer::printDeadEndMessage(int row, int col)
+void Printer::printDeadEndMessage(char col, int row)
 {
-    std::string message = "\nGot in a trap! from(" + std::to_string(row + 1) + ';' + std::to_string(col + 1) + ')';
-    std::cout << message << std::endl;
+    std::cout << "\nGot in a trap! from " << col << row + 1 << std::endl;
 }
-
