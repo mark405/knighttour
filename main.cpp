@@ -1,25 +1,22 @@
 #include <iostream>
-#include <vector> 
-#include <iomanip> 
 #include "Printer.h"
 #include "Move.h"
 #include "ClosedTourAlgorithm.h"
 #include "MovesCounter.h"
 #include "Menu.h"
-#include "TimerChecker.h"
 
 void menu();
 
-int main() 
+int main()
 {
     srand(time(NULL));
 
     menu();
 
     return 0;
-} 
+}
 
-void menu() 
+void menu()
 {
     Menu menu;
     Printer printer;
@@ -27,7 +24,7 @@ void menu()
     ClosedTourAlgorithm closedTourAlgorithm(printer, move);
 
     int choice, row, col;
-    char CharRow;
+    char colChar;
     bool status = true;
 
     while (status)
@@ -46,41 +43,41 @@ void menu()
             row = 0;
             col = 0;
 
-            menu.EnterPositions(row, CharRow, col);
+            menu.EnterPositions(row, col, colChar);
 
             RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
 
             if (RESULT == FAILURE)
             {
-                printer.printResultErrorMessage(row, col);
+                printer.printResultErrorMessage(colChar, row);
             }
-            else if (RESULT == TRAP)
+            else if(RESULT == TRAP)
             {
-                printer.printDeadEndMessage(row, col);
-            }
-            else if (RESULT == SUCCESS)
+                printer.printDeadEndMessage(colChar, row);
+            } else if (RESULT == SUCCESS)
             {
-                printer.printResultSuccessMessage(row, col);
+                printer.printResultSuccessMessage(colChar, row);
             }
             break;
-
         case 2:
             row = rand() % N + 1;
             col = rand() % N + 1;
 
+            colChar = col + '0' + 16;
+
             RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
 
             if (RESULT == FAILURE)
             {
-                printer.printResultErrorMessage(row, col);
+                printer.printResultErrorMessage(colChar, row);
             }
-            else if (RESULT == TRAP)
+            else if(RESULT == TRAP)
             {
-                printer.printDeadEndMessage(row, col);
+                printer.printDeadEndMessage(colChar, row);
             }
             else if (RESULT == SUCCESS)
             {
-                printer.printResultSuccessMessage(row, col);
+                printer.printResultSuccessMessage(colChar, row);
             }
             break;
 
@@ -91,8 +88,5 @@ void menu()
         default:
             printer.printIncorrectInputMessage();
         }
-        
-        std::cout << "Number of moves: " << MovesCounter::Getcount() << std::endl;
     }
 }
-
