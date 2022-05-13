@@ -1,11 +1,6 @@
 #include "ClosedTourAlgorithm.h"
 #include "MovesCounter.h"
 
-ClosedTourAlgorithm::ClosedTourAlgorithm(Printer& printer, Move& move)
-{
-    _printer = printer;  
-    _move = move;          
-}
 
 STATUS ClosedTourAlgorithm::findClosedTour(int& rowStart, int& colStart)
 {
