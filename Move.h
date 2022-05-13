@@ -2,9 +2,9 @@
 
 #include <vector>
 
-#define N 8
+#define N 8 
 
-class Move
+class Move //class that has all methods related to the movement of a knight
 {
 public:
 	bool neighbour(int rowStart, int colStart, int rowEnd, int colEnd, std::vector<std::vector<int>> possibleOptions); //checking if first move is close to last one
