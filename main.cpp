@@ -9,9 +9,9 @@ void menu();
 
 int main()
 {
-    srand(time(NULL));
+    srand(time(NULL)); //for real randomisation
 
-    menu();
+    menu(); //starting proccess...
 
     return 0;
 }
@@ -29,13 +29,13 @@ void menu()
 
     while (status)
     {
-        MovesCounter::ResetCount();
+        MovesCounter::ResetCount(); //sets counter to zero
 
-        menu.PrintOptions();
+        menu.PrintOptions(); //starting
 
         choice = menu.ChooseDestiny();
 
-        STATUS RESULT;
+        STATUS RESULT;//for status of func closedTourAlgorithm
 
         switch (choice)
         {
@@ -43,50 +43,50 @@ void menu()
             row = 0;
             col = 0;
 
-            menu.EnterPositions(row, col, colChar);
+            menu.EnterPositions(row, col, colChar);//let input pos to user
 
             RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
 
-            if (RESULT == FAILURE)
+            if (RESULT == FAILURE) //if an opened tour
             {
                 printer.printResultErrorMessage(colChar, row);
             }
-            else if(RESULT == TRAP)
+            else if(RESULT == TRAP) //if broken tour and have no end
             {
                 printer.printDeadEndMessage(colChar, row);
-            } else if (RESULT == SUCCESS)
+            } else if (RESULT == SUCCESS) //if closed tour
             {
                 printer.printResultSuccessMessage(colChar, row);
             }
             break;
         case 2:
-            row = rand() % N + 1;
+            row = rand() % N + 1; //1 - 8
             col = rand() % N + 1;
 
-            colChar = col + '0' + 16;
+            colChar = col + '0' + 16; //coversion from int to char
 
             RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
 
-            if (RESULT == FAILURE)
+            if (RESULT == FAILURE) //if an opened tour
             {
                 printer.printResultErrorMessage(colChar, row);
             }
-            else if(RESULT == TRAP)
+            else if(RESULT == TRAP) //if broken tour and have no end
             {
                 printer.printDeadEndMessage(colChar, row);
             }
-            else if (RESULT == SUCCESS)
+            else if (RESULT == SUCCESS) //if closed tour
             {
                 printer.printResultSuccessMessage(colChar, row);
             }
             break;
 
         case 3:
-            status = false;
+            status = false; //exit
             break;
 
         default:
-            printer.printIncorrectInputMessage();
+            printer.printIncorrectInputMessage(); //if no correct options were choosed
         }
     }
 }
