@@ -50,14 +50,14 @@ void Move::optimizeByWarnsdoffAlgorithm(std::vector<std::vector<int>>& table, in
 
         int c = 0; //count of possible moves of each j iteration
 
-        if (isValid(table, rowNext, colNext))
+        if (isValid(table, rowNext, colNext)) //checking is able to move
         {
             for (int j = 0; j < N; ++j)
             {
                 int rowNextNext = rowNext + possibleOptions[0][j];
                 int colNextNext = colNext + possibleOptions[1][j];
 
-                if (isValid(table, rowNextNext, colNextNext))
+                if (isValid(table, rowNextNext, colNextNext)) //checking is able to move
                 {
                     ++c;
                 }
@@ -65,7 +65,7 @@ void Move::optimizeByWarnsdoffAlgorithm(std::vector<std::vector<int>>& table, in
 
             if (c < minCount) //checking if current minCount value less than previous
             {
-                minCount = c;
+                minCount = c; //update data
                 index = i;
             }
         }
