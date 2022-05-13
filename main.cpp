@@ -27,6 +27,7 @@ void menu()
     ClosedTourAlgorithm closedTourAlgorithm(printer, move);
 
     int choice, row, col;
+    char CharRow;
     bool status = true;
 
     while (status)
@@ -45,7 +46,7 @@ void menu()
             row = 0;
             col = 0;
 
-            menu.EnterPositions(row, col);
+            menu.EnterPositions(row, CharRow, col);
 
             RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
 
