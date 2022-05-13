@@ -44,7 +44,7 @@ void Printer::printResultErrorMessage(int row, int col)
 
 void Printer::printResultSuccessMessage(int row, int col)
 {
-    std::string message = "\nSucces!Your starting position is (" + std::to_string(row + 1) + ';' + std::to_string(col + 1) + ')';
+    std::string message = "\nSuccess!Your starting position is (" + std::to_string(row + 1) + ';' + std::to_string(col + 1) + ')';
     std::cout << message << std::endl;
 }
 

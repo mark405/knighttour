@@ -1,24 +1,29 @@
-#include "Move.h"
-#include "MovesCounter.h"
+#include "Move.h"  // include Move header 
+#include "MovesCounter.h" //include Movescounter header
 
 bool Move::neighbour(int rowStart, int colStart, int rowEnd, int colEnd, std::vector<std::vector<int>> possibleOptions)
+                   //checking if first move is close to last one
 {
     for (int i = 0; i < N; ++i)
         if ((rowStart + possibleOptions[0][i] == rowEnd) && (colStart + possibleOptions[1][i] == colEnd))
+            // if rowStart and colStart is close to rowEnd and colEnd 
             return true;
 
     return false;
 }
 
 bool Move::isValid(std::vector<std::vector<int>>& table, int row, int col)
+                 //checking if moving knight is possible on position row, col
 {
-    return row >= 0 && row < N&& col >= 0 && col < N && !table[row][col];
+    return row >= 0 && row < N && col >= 0 && col < N && !table[row][col]; 
+    // return *true* if ALL conditions have been complied else return *false*
 }
 
 bool Move::nextMove(std::vector<std::vector<int>>& table, int& row, int& col, std::vector<std::vector<int>> possibleOptions)
+                  // moving knight
 {
-    int minCount = 8;
-    int index = 0;
+    int minCount = 8; // minCount of possible moves at the beggining
+    int index = 0; // initilization of index
 
     optimizeByWarnsdoffAlgorithm(table, index, minCount, row, col, possibleOptions); //find the best move
 
@@ -36,12 +41,14 @@ bool Move::nextMove(std::vector<std::vector<int>>& table, int& row, int& col, st
 }
 
 void Move::optimizeByWarnsdoffAlgorithm(std::vector<std::vector<int>>& table, int& index, int& minCount, int rowStart, int colStart, std::vector<std::vector<int>> possibleOptions)
+                                       //finding move that has minimum next moves
 {
     for (int i = 0; i < N; ++i)
     {
         int rowNext = rowStart + possibleOptions[0][i];
         int colNext = colStart + possibleOptions[1][i];
-        int c = 0;//count of possible moves of each j iteration
+
+        int c = 0; //count of possible moves of each j iteration
 
         if (isValid(table, rowNext, colNext))
         {
@@ -56,7 +63,7 @@ void Move::optimizeByWarnsdoffAlgorithm(std::vector<std::vector<int>>& table, in
                 }
             }
 
-            if (c < minCount) //checking if current miCount value less than previous
+            if (c < minCount) //checking if current minCount value less than previous
             {
                 minCount = c;
                 index = i;
