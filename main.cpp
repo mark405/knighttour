@@ -47,14 +47,14 @@ void menu()
 
             RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
 
-            if (RESULT == FAILURE) //if an opened tour
+            if (RESULT == STATUS::FAILURE) //if an opened tour
             {
                 printer.printResultErrorMessage(colChar, row);
             }
-            else if(RESULT == TRAP) //if broken tour and have no end
+            else if(RESULT == STATUS::TRAP) //if broken tour and have no end
             {
                 printer.printDeadEndMessage(colChar, row);
-            } else if (RESULT == SUCCESS) //if closed tour
+            } else if (RESULT == STATUS::SUCCESS) //if closed tour
             {
                 printer.printResultSuccessMessage(colChar, row);
             }
@@ -67,15 +67,15 @@ void menu()
 
             RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
 
-            if (RESULT == FAILURE) //if an opened tour
+            if (RESULT == STATUS::FAILURE) //if an opened tour
             {
                 printer.printResultErrorMessage(colChar, row);
             }
-            else if(RESULT == TRAP) //if broken tour and have no end
+            else if(RESULT == STATUS::TRAP) //if broken tour and have no end
             {
                 printer.printDeadEndMessage(colChar, row);
             }
-            else if (RESULT == SUCCESS) //if closed tour
+            else if (RESULT == STATUS::SUCCESS) //if closed tour
             {
                 printer.printResultSuccessMessage(colChar, row);
             }
