@@ -1,14 +1,14 @@
 #include "Menu.h"
 #include <iostream>
 
-void Menu::PrintOptions()//printing menu
+void Menu::PrintOptions()
 {
     std::cout << "\n1.Enter positions\n";
     std::cout << "2.Random positions\n";
     std::cout << "3.Exit\n";
 }
 
-int Menu::ChooseDestiny()//choosing of action
+int Menu::ChooseDestiny()
 {
     int choice;
 
@@ -18,16 +18,24 @@ int Menu::ChooseDestiny()//choosing of action
     return choice;
 }
 
-void Menu::EnterPositions(int& row, int& col)//entering starting positions
+void Menu::EnterPositions(int& row, char& CharRow, int& col)
 {
     std::cout << "\nEnter positions:";
-    do //asking user for starting positions until  the possible  positions are entered
+    do
     {
         std::cout << "\nRow: ";
-        std::cin >> row;
+        std::cin >> CharRow;
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(32767, '\n');
+        }
         std::cout << "Col: ";
         std::cin >> col;
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(32767, '\n');
+        }
+        CharRow = toupper(CharRow);
+        row = CharRow - '0' - 16;
     } while (row <= 0 || col <= 0 || row > N || col > N);
 }
-
-
