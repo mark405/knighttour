@@ -36,13 +36,13 @@ void Printer::printTable(std::vector<std::vector<int>>& table)//printing matrix
     std::cout << std::endl;
 }
 
-void Printer::printResultErrorMessage(int row, int col)//printing error message
+void Printer::printResultErrorMessage(char col, int row)//printing error message
 {
     //printing error message and starting position
      std::cout << "\nCan't return to starting position from " << col << row + 1 << std::endl;
 }
 
-void Printer::printResultSuccessMessage(int row, int col)//printing success message
+void Printer::printResultSuccessMessage(char col, int row)//printing success message
 {
     //printing success message and starting position
     std::cout << "\nSucces!Your starting position is " << col << row + 1 << std::endl;
@@ -53,7 +53,7 @@ void Printer::printIncorrectInputMessage()//printing message when got in trap
     std::cout << "\nIncorrect input." << std::endl;
 }
 
-void Printer::printDeadEndMessage(int row, int col)//printing message when user chooses incorrect menu item
+void Printer::printDeadEndMessage(char col, int row)//printing message when user chooses incorrect menu item
 {
     //printing message about trap and starting position
      std::cout << "\nGot in a trap! from " << col << row + 1 << std::endl;
