@@ -43,7 +43,7 @@ void menu()
             row = 0;
             col = 0;
 
-            menu.EnterPositions(row, col, colChar);//let input pos to user
+            menu.EnterPositions(row, colChar, col);//let input pos to user
 
             RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
 
