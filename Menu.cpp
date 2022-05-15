@@ -15,27 +15,37 @@ int Menu::ChooseDestiny()
     std::cout << "\nChoose your destiny:\n";
     std::cin >> choice;
 
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(32767, '\n');
+        choice = -1;
+    }
+
     return choice;
 }
 
-void Menu::EnterPositions(int& row, char& CharRow, int& col)
+void Menu::EnterPositions(int &row, int &col, char &colChar)
 {
     std::cout << "\nEnter positions:";
     do
     {
-        std::cout << "\nRow: ";
-        std::cin >> CharRow;
+        std::cout << "\nLetter: ";
+        std::cin >> colChar;
+
         if (std::cin.fail()) {
             std::cin.clear();
             std::cin.ignore(32767, '\n');
         }
-        std::cout << "Col: ";
-        std::cin >> col;
-        if (std::cin.fail()) {
+
+        std::cout << "Number: ";
+        std::cin >> row;
+
+        if(std::cin.fail()) {
             std::cin.clear();
             std::cin.ignore(32767, '\n');
         }
-        CharRow = toupper(CharRow);
-        row = CharRow - '0' - 16;
+
+        col = toupper(colChar) - '0' - 16;
     } while (row <= 0 || col <= 0 || row > N || col > N);
 }
+
