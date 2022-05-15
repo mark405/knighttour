@@ -24,13 +24,12 @@ STATUS ClosedTourAlgorithm::findClosedTour(int& rowStart, int& colStart)
         if (!_move.nextMove(table, row, col, possibleOptions)) //if got lost or didnt find    
         {
             _printer.printTable(table);
-            return TRAP; 
-            //            return false;
+            return STATUS::TRAP; 
         }
     }
 
     _printer.printTable(table);
 
-    return _move.neighbour(rowStart, colStart, row, col, possibleOptions) ? SUCCESS : FAILURE; //if neighbour
+    return _move.neighbour(rowStart, colStart, row, col, possibleOptions) ? STATUS::SUCCESS : STATUS::FAILURE; //if neighbour
 }
 
