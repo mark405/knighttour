@@ -38,14 +38,14 @@ void Printer::printTable(std::vector<std::vector<int>>& table)//printing matrix
 
 void Printer::printResultErrorMessage(int row, int col)//printing error message
 {
-    std::string message = "\nCan't return to starting position from (" + std::to_string(row + 1) + ';' + std::to_string(col + 1) + ')';//printing error message and starting position
-    std::cout << message << std::endl;
+    //printing error message and starting position
+     std::cout << "\nCan't return to starting position from " << col << row + 1 << std::endl;
 }
 
 void Printer::printResultSuccessMessage(int row, int col)//printing success message
 {
-    std::string message = "\nSucces!Your starting position is (" + std::to_string(row + 1) + ';' + std::to_string(col + 1) + ')';//printing success message and starting position
-    std::cout << message << std::endl;
+    //printing success message and starting position
+    std::cout << "\nSucces!Your starting position is " << col << row + 1 << std::endl;
 }
 
 void Printer::printIncorrectInputMessage()//printing message when got in trap
@@ -55,7 +55,7 @@ void Printer::printIncorrectInputMessage()//printing message when got in trap
 
 void Printer::printDeadEndMessage(int row, int col)//printing message when user chooses incorrect menu item
 {
-    std::string message = "\nGot in a trap! from(" + std::to_string(row + 1) + ';' + std::to_string(col + 1) + ')';//printing message about trap and starting position
-    std::cout << message << std::endl;
+    //printing message about trap and starting position
+     std::cout << "\nGot in a trap! from " << col << row + 1 << std::endl;
 }
 
