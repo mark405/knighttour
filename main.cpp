@@ -46,6 +46,8 @@ void menu()
             menu.EnterPositions(row, col, colChar);//let input pos to user
 
             RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
+                
+            colChar = toupper(colChar);
 
             if (RESULT == STATUS::FAILURE) //if an opened tour
             {
