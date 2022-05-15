@@ -1,7 +1,7 @@
 #include "Move.h"  // include Move header 
 #include "MovesCounter.h" //include Movescounter header
 
-bool Move::neighbour(int rowStart, int colStart, int rowEnd, int colEnd, std::vector<std::vector<int>> possibleOptions)
+bool Move::neighbour(int rowStart, int colStart, int rowEnd, int colEnd, const std::vector<std::vector<int>> possibleOptions)
                    //checking if first move is close to last one
 {
     for (int i = 0; i < N; ++i)
@@ -19,7 +19,7 @@ bool Move::isValid(std::vector<std::vector<int>>& table, int row, int col)
     // return *true* if ALL conditions have been complied else return *false*
 }
 
-bool Move::nextMove(std::vector<std::vector<int>>& table, int& row, int& col, std::vector<std::vector<int>> possibleOptions)
+bool Move::nextMove(std::vector<std::vector<int>>& table, int& row, int& col, const std::vector<std::vector<int>> possibleOptions)
                   // moving knight
 {
     int minCount = 8; // minimum count of moves for the next move
@@ -40,7 +40,7 @@ bool Move::nextMove(std::vector<std::vector<int>>& table, int& row, int& col, st
     return true;
 }
 
-void Move::optimizeByWarnsdoffAlgorithm(std::vector<std::vector<int>>& table, int& index, int& minCount, int rowStart, int colStart, std::vector<std::vector<int>> possibleOptions)
+void Move::optimizeByWarnsdoffAlgorithm(std::vector<std::vector<int>>& table, int& index, int& minCount, int rowStart, int colStart, const std::vector<std::vector<int>> possibleOptions)
                                        //finding move that has minimum next moves
 {
     for (int i = 0; i < N; ++i)
