@@ -22,8 +22,8 @@ bool Move::isValid(std::vector<std::vector<int>>& table, int row, int col)
 bool Move::nextMove(std::vector<std::vector<int>>& table, int& row, int& col, std::vector<std::vector<int>> possibleOptions)
                   // moving knight
 {
-    int minCount = 8; // minCount of possible moves at the beggining
-    int index = 0; // initilization of index
+    int minCount = 8; // minimum count of moves for the next move
+    int index = 0; // index of next move that has minCount moves
 
     optimizeByWarnsdoffAlgorithm(table, index, minCount, row, col, possibleOptions); //find the best move
 
