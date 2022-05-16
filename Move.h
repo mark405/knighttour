@@ -1,7 +1,5 @@
 #pragma once
-
 #include <vector>
-
 #define N 8 
 
 class Move //class that has all methods related to the movement of a knight
