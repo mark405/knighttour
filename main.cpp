@@ -11,12 +11,12 @@ int main()
 {
     srand(time(NULL)); //for real randomisation
 
-    menu(); //starting proccess...
+    process(); //starting proccess...
 
     return 0;
 }
 
-void menu()
+void process()
 {
     Menu menu;
     Printer printer;
