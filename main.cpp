@@ -39,57 +39,58 @@ void menu()
 
         switch (choice)
         {
-        case 1:
-            row = 0;
-            col = 0;
+            case 1:
+                row = 0;
+                col = 0;
 
-            menu.EnterPositions(row, col, colChar);//let input pos to user
+                menu.EnterPositions(row, col, colChar);//let input pos to user
 
-            RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
-                
-            colChar = toupper(colChar);
+                RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
 
-            if (RESULT == STATUS::FAILURE) //if an opened tour
-            {
-                printer.printResultErrorMessage(colChar, row);
-            }
-            else if(RESULT == STATUS::TRAP) //if broken tour and have no end
-            {
-                printer.printDeadEndMessage(colChar, row);
-            } else if (RESULT == STATUS::SUCCESS) //if closed tour
-            {
-                printer.printResultSuccessMessage(colChar, row);
-            }
-            break;
-        case 2:
-            row = rand() % N + 1; //1 - 8
-            col = rand() % N + 1;
+                colChar = toupper(colChar);
 
-            colChar = col + '0' + 16; //coversion from int to char
+                if (RESULT == STATUS::FAILURE) //if an opened tour
+                {
+                    printer.printResultErrorMessage(colChar, row);
+                }
+                else if(RESULT == STATUS::TRAP) //if broken tour and have no end
+                {
+                    printer.printDeadEndMessage(colChar, row);
+                } else if (RESULT == STATUS::SUCCESS) //if closed tour
+                {
+                    printer.printResultSuccessMessage(colChar, row);
+                }
+                std::cout << "Number of moves: " << MovesCounter::Getcount() << std::endl;
+                break;
+            case 2:
+                row = rand() % N + 1; //1 - 8
+                col = rand() % N + 1;
 
-            RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
+                colChar = col + '0' + 16; //coversion from int to char
 
-            if (RESULT == STATUS::FAILURE) //if an opened tour
-            {
-                printer.printResultErrorMessage(colChar, row);
-            }
-            else if(RESULT == STATUS::TRAP) //if broken tour and have no end
-            {
-                printer.printDeadEndMessage(colChar, row);
-            }
-            else if (RESULT == STATUS::SUCCESS) //if closed tour
-            {
-                printer.printResultSuccessMessage(colChar, row);
-            }
-            break;
+                RESULT = closedTourAlgorithm.findClosedTour(--row, --col);
 
-        case 3:
-            status = false; //exit
-            break;
+                if (RESULT == STATUS::FAILURE) //if an opened tour
+                {
+                    printer.printResultErrorMessage(colChar, row);
+                }
+                else if(RESULT == STATUS::TRAP) //if broken tour and have no end
+                {
+                    printer.printDeadEndMessage(colChar, row);
+                }
+                else if (RESULT == STATUS::SUCCESS) //if closed tour
+                {
+                    printer.printResultSuccessMessage(colChar, row);
+                }
+                std::cout << "Number of moves: " << MovesCounter::Getcount() << std::endl;
+                break;
 
-        default:
-            printer.printIncorrectInputMessage(); //if no correct options were choosed
+            case 3:
+                status = false; //exit
+                break;
+
+            default:
+                printer.printIncorrectInputMessage(); //if no correct options were choosed
         }
-        std::cout << "Number of moves: " << MovesCounter::Getcount() << std::endl;
     }
 }
