@@ -5,9 +5,9 @@
 #include "MovesCounter.h"
 #include "Menu.h"
 
-void menu();
+void process();
 
-int process()
+int main()
 {
     srand(time(NULL)); //for real randomisation
 
