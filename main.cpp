@@ -7,7 +7,7 @@
 
 void menu();
 
-int main()
+int process()
 {
     srand(time(NULL)); //for real randomisation
 
